@@ -13,12 +13,26 @@ import Button from "@material-ui/core/Button";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grow from "@material-ui/core/Grow"
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import ForumIcon from '@material-ui/icons/Forum';
 import Avatar from "@material-ui/core/Avatar";
 import avatar from '../../assets/avatar.jpg'
 import Badge from "@material-ui/core/Badge";
-import SvgIcon from "@material-ui/icons/Search";
-import message from '../../assets/message.svg'
+import Tooltip from "@material-ui/core/Tooltip";
+import ListItem from "@material-ui/core/ListItem";
+import List from "@material-ui/core/List";
+import PersonIcon from '@material-ui/icons/Person';
+import SettingsIcon from '@material-ui/icons/Settings';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import Divider from "@material-ui/core/Divider";
+import guanjia from '../../assets/guanjia.jpg'
+import renzheng from '../../assets/renzheng.svg'
+import CreateIcon from '@material-ui/icons/Create';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import GroupIcon from '@material-ui/icons/Group';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import {connect} from 'react-redux'
+import * as action from '../../store/action/index'
 
 function Navigation(props) {
     const useStyle=makeStyles((theme)=>{
@@ -26,6 +40,7 @@ function Navigation(props) {
             appbar:{
                 height:'52px',
                 boxShadow:'0 1px 3px rgba(18,18,18,.1)',
+                minWidth:'1100px'
             },
             toolbar:{
                 minHeight:'52px'
@@ -118,7 +133,101 @@ function Navigation(props) {
             },
             badge:{
                 right:'20px',
-                top:'3px'
+                top:'3px',
+                padding:'0 3px',
+                height:'17px',
+                minWidth:'17px'
+            },
+            listItem:{
+                fontSize:'14px',
+                color:'#8590a6'
+            },
+            msgListItem:{
+                fontSize:'14px',
+                width:'360px',
+                justifyContent:'center',
+                height:'48px',
+                color:'#121212',
+                '&:hover':{
+                    color:'#8590a6'
+                }
+            },
+            tooltip:{
+                padding:'0',
+                background:'white',
+                boxShadow:'0 1px 3px rgba(18,18,18,.1)'
+            },
+            msgTooltip:{
+                padding:'0',
+                background:'white',
+                boxShadow:'0 1px 3px rgba(18,18,18,.1)',
+                maxWidth:'360px'
+            },
+            tooltipArrow:{
+                color:'white'
+            },
+            msgButton:{
+                padding:'0',
+                '&:hover':{
+                    background:'transparent'
+                },
+                fontSize:'14px',
+                color:'#8590a6'
+            },
+            bellIcon1:{
+                color:'#8590a6'
+            },
+            bellIcon2:{
+                color:'#8590a6'
+            },
+            bellIcon3:{
+                color:'#8590a6'
+            },
+            bellIconSelected:{
+                color:'#0084ff'
+            },
+            bellButton1:{
+                minWidth:'120px',
+                borderRadius:'0',
+                padding:'0',
+                '&:hover':{
+                    background:'transparent'
+                }
+            },
+            bellButton2:{
+                minWidth:'120px',
+                borderLeft:'1px solid #ebebeb',
+                borderRight:'1px solid #ebebeb',
+                borderRadius:'0',
+                padding:'0',
+                '&:hover':{
+                    background:'transparent'
+                }
+            },
+            bellButton3:{
+                minWidth:'120px',
+                borderRadius:'0',
+                padding:'0',
+                '&:hover':{
+                    background:'transparent'
+                }
+            },
+            a:{
+                textDecoration:'none',
+                fontSize:'14px',
+                color:'#175199',
+                '&:visited':{
+                    color:'#175199'
+                }
+            },
+            chatBubbleIcon:{
+                marginRight:'42px',
+                marginTop:'6px',
+                height:'21px',
+                width:'21px',
+                color:'#8590a6',
+                marginLeft:'23px',
+                cursor:'pointer'
             }
         }
     })
@@ -126,6 +235,90 @@ function Navigation(props) {
 
     const [index,setIndex]=useState(0)
     const [focus,setFocus]=useState(false)
+
+    const question=<React.Fragment>
+        <List style={{padding:'0',height:'350px',overflowY:'scroll'}}>
+            <ListItem disableRipple style={{padding:'15px',paddingTop:'18px'}}>
+                <div style={{lineHeight:'24px'}}>
+                    <span style={{fontSize:'14px',color:'#121212'}}>&nbsp;邀请你回答&nbsp;</span>
+                    <a href='#' className={classes.a}>人类如何减少身体的痛苦?</a>
+                </div>
+            </ListItem>
+            <Divider style={{width:'90%',margin:'0 auto'}}/>
+            <ListItem disableRipple style={{padding:'15px',paddingTop:'18px'}}>
+                <div style={{lineHeight:'24px'}}>
+                    <a href='#' className={classes.a}>夏夜晚风</a>
+                    <span style={{fontSize:'14px',color:'#121212'}}>&nbsp;的提问等你来答&nbsp;</span>
+                    <a href='#' className={classes.a}>任豪和林彦俊你更吃谁的颜？</a>
+                </div>
+            </ListItem>
+            <Divider style={{width:'90%',margin:'0 auto'}}/>
+            <ListItem disableRipple style={{padding:'15px',paddingTop:'18px'}}>
+                <div style={{lineHeight:'24px'}}>
+                    <a href='#' className={classes.a}>青春无敌</a>
+                    <span style={{fontSize:'14px',color:'#121212'}}>&nbsp;的提问等你来答&nbsp;</span>
+                    <a href='#' className={classes.a}>上初一后每天早起晚睡，上课总是很困，该怎么办？</a>
+                </div>
+            </ListItem>
+            <Divider style={{width:'90%',margin:'0 auto'}}/>
+            <ListItem disableRipple style={{padding:'15px',paddingTop:'18px'}}>
+                <div style={{lineHeight:'24px'}}>
+                    <a href='#' className={classes.a}>最后的轻语</a>
+                    <span style={{fontSize:'14px',color:'#121212'}}>&nbsp;的提问等你来答&nbsp;</span>
+                    <a href='#' className={classes.a}> 怎么看大街上戴耳机走路的人？</a>
+                </div>
+            </ListItem>
+            <Divider style={{width:'90%',margin:'0 auto'}}/>
+            <ListItem disableRipple style={{padding:'15px',paddingTop:'18px'}}>
+                <div style={{lineHeight:'24px'}}>
+                    <a href='#' className={classes.a}></a>
+                    <span style={{fontSize:'14px',color:'#121212'}}>&nbsp;邀请你回答&nbsp;</span>
+                    <a href='#' className={classes.a}>  宅家的你是如何与自己自处的1？</a>
+                </div>
+            </ListItem>
+            <Divider style={{width:'90%',margin:'0 auto'}}/>
+            <ListItem disableRipple style={{padding:'15px',paddingTop:'18px'}}>
+                <div style={{lineHeight:'24px'}}>
+                    <a href='#' className={classes.a}></a>
+                    <span style={{fontSize:'14px',color:'#121212'}}>&nbsp;邀请你回答&nbsp;</span>
+                    <a href='#' className={classes.a}>  你们养猫都多长时间了？</a>
+                </div>
+            </ListItem>
+        </List>
+    </React.Fragment>
+
+    const message=<React.Fragment>
+        <div style={{height:'350px',display:'flex',alignItems:'center',justifyContent:'center'}}>
+            <div>
+                <NotificationsNoneIcon style={{color:'#ebeef5',width:'130px',height:'100px'}}/>
+                <div style={{textAlign:'center',marginTop:'20px'}}>
+                    <span style={{fontSize:'15px',color:'#8590a6'}}>还没有消息</span>
+                </div>
+            </div>
+        </div>
+    </React.Fragment>
+
+    const like=<React.Fragment>
+        <div style={{height:'350px',display:'flex',alignItems:'center',justifyContent:'center'}}>
+            <div>
+                <NotificationsNoneIcon style={{color:'#ebeef5',width:'130px',height:'100px'}}/>
+                <div style={{textAlign:'center',marginTop:'20px'}}>
+                    <span style={{fontSize:'15px',color:'#8590a6'}}>还没有消息</span>
+                </div>
+            </div>
+        </div>
+    </React.Fragment>
+
+    let content=null
+    if(props.question){
+        content=question
+    }else if(props.message){
+        content=message
+    }else if(props.like){
+        content=like
+    }else{
+        content=null
+    }
 
     return (
         <React.Fragment>
@@ -167,13 +360,125 @@ function Navigation(props) {
                             </Button>
                         </Grow>
                         <div style={{display:'flex',alignItems:'center',marginLeft:'auto'}}>
-                            <Badge badgeContent={1} color={'error'} classes={{badge:classes.badge}}>
-                                <NotificationsIcon className={classes.rightIcons}/>
-                            </Badge>
-                            <img src={message} alt={'message'} className={classes.rightIcons} style={{marginRight:'36px',height:'21px',width:'21px'}}/>
-                            <Avatar variant={'square'} style={{height:'30px',width:'30px',cursor:'pointer'}}>
-                                <img src={avatar} alt='avatar' style={{height:'30px',width:'30px'}}/>
-                            </Avatar>
+                            <ClickAwayListener onClickAway={props.closeNotification}>
+                                <div>
+                                    <Tooltip title={
+                                        <React.Fragment>
+                                            <List style={{padding:'0',height:'50px'}}>
+                                                <ListItem className={classes.msgListItem} disableRipple>
+                                                    <Button className={classes.bellButton1} disableRipple onClick={props.openQuestion}>
+                                                        <FormatListBulletedIcon className={props.question?classes.bellIconSelected:classes.bellIcon1}/>
+                                                    </Button>
+                                                    <Button className={classes.bellButton2} disableRipple onClick={props.openMessage}>
+                                                        <GroupIcon className={props.message?classes.bellIconSelected:classes.bellIcon2}/>
+                                                    </Button>
+                                                    <Button className={classes.bellButton3} disableRipple onClick={props.openLike}>
+                                                        <FavoriteIcon className={props.like?classes.bellIconSelected:classes.bellIcon3}/>
+                                                    </Button>
+                                                </ListItem>
+                                                <Divider/>
+                                            </List>
+                                            {content}
+                                            <Divider/>
+                                            <List style={{padding:'0'}}>
+                                                <ListItem style={{height:'40px'}}>
+                                                    <Button className={classes.msgButton} disableRipple style={{marginLeft:'-10px'}}>
+                                                        <SettingsIcon style={{fontSize:'16px',marginRight:'3px',marginBottom:'2px'}}/>
+                                                        设置
+                                                    </Button>
+                                                    <Button className={classes.msgButton} disableRipple style={{marginLeft:'auto',marginRight:'-2px'}}>
+                                                        查看全部通知
+                                                    </Button>
+                                                </ListItem>
+                                            </List>
+                                        </React.Fragment>
+                                    }
+                                             interactive
+                                             arrow
+                                             disableFocusListener
+                                             disableHoverListener
+                                             disableTouchListener
+                                             open={props.notification}
+                                             classes={{tooltip:classes.msgTooltip,arrow:classes.tooltipArrow}}
+                                    >
+                                        <Badge badgeContent={1} color={'error'} classes={{badge:classes.badge}}>
+                                            <NotificationsIcon className={classes.rightIcons} onClick={props.openNotification}/>
+                                        </Badge>
+                                    </Tooltip>
+                                </div>
+                            </ClickAwayListener>
+                            <ClickAwayListener onClickAway={props.closeMessageIcon}>
+                                <div>
+                                    <Tooltip title={
+                                        <React.Fragment>
+                                            <List style={{padding:'0',height:'400px'}}>
+                                                <ListItem className={classes.msgListItem} button disableRipple>
+                                                    我的私信
+                                                </ListItem>
+                                                <Divider/>
+                                                <ListItem button disableRipple>
+                                                    <img src={guanjia} alt='guanjia' style={{height:'40px',width:'40px',padding:'10px 0'}}/>
+                                                    <div style={{marginLeft:'15px',marginTop:'3px'}}>
+                                                        <div style={{display:'flex',alignItems:'center'}}>
+                                                            <span style={{color:'#121212',fontSize:'15px'}}>知乎小管家</span>
+                                                            <img src={renzheng} alt='renzheng' style={{height:'20px',width:'20px'}}/>
+                                                        </div>
+                                                        <span style={{color:'#8590a6',fontSize:'14px',lineHeight:'23px'}}>亲爱的 知乎用户 你好: 欢迎你来到知乎...</span>
+                                                    </div>
+                                                </ListItem>
+                                            </List>
+                                            <Divider/>
+                                            <List style={{padding:'0'}}>
+                                                <ListItem style={{height:'40px'}}>
+                                                    <Button className={classes.msgButton} disableRipple style={{marginLeft:'-2px'}}>
+                                                        <CreateIcon style={{fontSize:'16px',marginRight:'3px',marginBottom:'2px'}}/>
+                                                        写新私信
+                                                    </Button>
+                                                    <Button className={classes.msgButton} disableRipple style={{marginLeft:'auto',marginRight:'-2px'}}>
+                                                        查看全部私信
+                                                    </Button>
+                                                </ListItem>
+                                            </List>
+                                        </React.Fragment>
+                                    }
+                                             interactive
+                                             arrow
+                                             open={props.messageIcon}
+                                             classes={{tooltip:classes.msgTooltip,arrow:classes.tooltipArrow}}
+                                    >
+                                        <ChatBubbleIcon className={classes.chatBubbleIcon} onClick={props.openMessageIcon}/>
+                                    </Tooltip>
+                                </div>
+                            </ClickAwayListener>
+                            <ClickAwayListener onClickAway={props.closeLikeIcon}>
+                                <div>
+                                    <Tooltip title={
+                                        <List style={{padding:'0'}}>
+                                            <ListItem className={classes.listItem} button>
+                                                <PersonIcon style={{fontSize:'20px',marginRight:'3px'}}/>
+                                                <span style={{paddingTop:'2px'}}>我的主页</span>
+                                            </ListItem>
+                                            <ListItem className={classes.listItem} button>
+                                                <SettingsIcon style={{fontSize:'18px',marginRight:'3px',marginLeft:'1px'}}/>
+                                                <span style={{paddingTop:'2px'}}>设置</span>
+                                            </ListItem>
+                                            <ListItem className={classes.listItem} button>
+                                                <PowerSettingsNewIcon style={{fontSize:'18px',marginRight:'3px',marginLeft:'1px'}}/>
+                                                <span style={{paddingTop:'2px'}}>退出</span>
+                                            </ListItem>
+                                        </List>
+                                    }
+                                             interactive
+                                             arrow
+                                             open={props.likeIcon}
+                                             classes={{tooltip:classes.tooltip,arrow:classes.tooltipArrow}}
+                                    >
+                                        <Avatar variant={'square'} style={{height:'30px',width:'30px',cursor:'pointer'}} onClick={props.openLikeIcon}>
+                                            <img src={avatar} alt='avatar' style={{height:'30px',width:'30px'}}/>
+                                        </Avatar>
+                                    </Tooltip>
+                                </div>
+                            </ClickAwayListener>
                         </div>
                     </Toolbar>
                 </Container>
@@ -182,4 +487,29 @@ function Navigation(props) {
     );
 }
 
-export default Navigation;
+const mapStateToProps=(state)=>{
+    return{
+        question:state.navigation.question,
+        message:state.navigation.message,
+        like:state.navigation.like,
+        notification:state.navigation.notification,
+        messageIcon:state.navigation.messageIcon,
+        likeIcon:state.navigation.likeIcon
+    }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        openQuestion:()=>{dispatch(action.openQuestion())},
+        openMessage:()=>{dispatch(action.openMessage())},
+        openLike:()=>{dispatch(action.openLike())},
+        openNotification:()=>{dispatch(action.openNotification())},
+        closeNotification:()=>{dispatch(action.closeNotification())},
+        openMessageIcon:()=>{dispatch(action.openMessageIcon())},
+        closeMessageIcon:()=>{dispatch(action.closeMessageIcon())},
+        openLikeIcon:()=>{dispatch(action.openLikeIcon())},
+        closeLikeIcon:()=>{dispatch(action.closeLikeIcon())}
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Navigation);
