@@ -135,8 +135,9 @@ function Navigation(props) {
                 right:'20px',
                 top:'3px',
                 padding:'0 3px',
-                height:'17px',
-                minWidth:'17px'
+                height:'19px',
+                minWidth:'19px',
+                border:'2px solid white'
             },
             listItem:{
                 fontSize:'14px',

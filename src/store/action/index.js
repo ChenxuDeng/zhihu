@@ -9,3 +9,8 @@ export {
     openLikeIcon,
     closeLikeIcon
 } from './navigation'
+
+export {
+    openFullArticle,
+    closeFullArticle
+} from './frontPage'

@@ -7,10 +7,12 @@ import {createStore,compose,combineReducers,applyMiddleware} from "redux";
 import thunk from "redux-thunk";
 import {Provider} from "react-redux";
 import navigation from "./store/reducer/navigation";
+import frontPage from "./store/reducer/frontPage";
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 const rootReducer=combineReducers({
-    navigation:navigation
+    navigation:navigation,
+    frontPage:frontPage
 })
 
 const store=createStore(rootReducer,composeEnhancers(
