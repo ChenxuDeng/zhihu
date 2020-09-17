@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -19,6 +19,8 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import FullArticle from "./fullArticle/fullArticle";
 import {connect} from 'react-redux'
 import * as action from '../../../store/action/index'
+import Tooltip from "@material-ui/core/Tooltip";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 function Articles(props) {
     const useStyle=makeStyles((theme)=>{
@@ -122,10 +124,20 @@ function Articles(props) {
                 '&:hover':{
                     background:'rgba(0,132,255,.2)'
                 }
+            },
+            toolTip:{
+                padding:'0',
+                background:'white',
+                boxShadow:'0 1px 3px rgba(18,18,18,.1)'
+            },
+            arrow:{
+                color:'white'
             }
         }
     })
     const classes=useStyle()
+
+    const [toolTip,setToolTip]=useState(false)
 
     const fullContent=<FullArticle/>
     const titleContent=<React.Fragment>
@@ -165,9 +177,32 @@ function Articles(props) {
                 <FavoriteIcon style={{fontSize:'15px',marginRight:'6px'}}/>
                 喜欢
             </Button>
-            <Button className={classes.iconButton} style={{minWidth:'36px'}} disableRipple>
-                <MoreHorizIcon style={{fontSize:'15px'}}/>
-            </Button>
+            <ClickAwayListener onClickAway={()=>{setToolTip(false)}}>
+                <div>
+                    <Tooltip title={
+                        <List style={{padding:'0'}}>
+                            <ListItem style={{fontSize:'14px',color:'#8590a6'}} button>
+                                没有帮助
+                            </ListItem>
+                            <ListItem style={{fontSize:'14px',color:'#8590a6'}} button>
+                                举报
+                            </ListItem>
+                            <ListItem style={{fontSize:'14px',color:'#8590a6'}} button>
+                                不感兴趣
+                            </ListItem>
+                        </List>
+                    }
+                             interactive
+                             arrow
+                             open={toolTip}
+                             classes={{tooltip:classes.toolTip,arrow:classes.arrow}}
+                    >
+                        <Button className={classes.iconButton} style={{minWidth:'36px'}} disableRipple onClick={()=>{setToolTip(!toolTip)}}>
+                            <MoreHorizIcon style={{fontSize:'15px'}}/>
+                        </Button>
+                    </Tooltip>
+                </div>
+            </ClickAwayListener>
         </div>
     </React.Fragment>
 

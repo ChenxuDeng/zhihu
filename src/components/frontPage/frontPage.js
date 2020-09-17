@@ -36,8 +36,8 @@ function FrontPage(props) {
             },
             wrapper:{
                 background:'#f6f6f6',
-                height:'100%',
-                paddingTop:'10px'
+                paddingTop:'10px',
+
             }
         }
     })
