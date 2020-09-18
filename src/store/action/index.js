@@ -12,5 +12,11 @@ export {
 
 export {
     openFullArticle,
-    closeFullArticle
+    closeFullArticle,
+    openDummyArticle,
+    closeDummyArticle,
+    agree,
+    disagree,
+    dummyAgree,
+    dummyDisagree
 } from './frontPage'

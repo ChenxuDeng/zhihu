@@ -21,6 +21,8 @@ import {connect} from 'react-redux'
 import * as action from '../../../store/action/index'
 import Tooltip from "@material-ui/core/Tooltip";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import DummyFullArticle from "./fullArticle/dummyFullArticle";
+import {Link} from 'react-router-dom'
 
 function Articles(props) {
     const useStyle=makeStyles((theme)=>{
@@ -113,6 +115,16 @@ function Articles(props) {
                     background:'rgba(0,132,255,.2)'
                 }
             },
+            agreedButton:{
+                color:'white',
+                background:'#0084ff',
+                paddingLeft:'7px',
+                height:'32px',
+                paddingTop:'4px',
+                '&:hover':{
+                    background:'#0084ff'
+                }
+            },
             disagreeButton:{
                 color:'#0084ff',
                 background:'rgba(0,132,255,.1)',
@@ -123,6 +135,18 @@ function Articles(props) {
                 paddingTop:'4px',
                 '&:hover':{
                     background:'rgba(0,132,255,.2)'
+                }
+            },
+            disagreedButton:{
+                color:'white',
+                background:'#0084ff',
+                minWidth:'32px',
+                padding:'6px 6px',
+                marginLeft:'5px',
+                height:'32px',
+                paddingTop:'4px',
+                '&:hover':{
+                    background:'#0084ff'
                 }
             },
             toolTip:{
@@ -138,6 +162,7 @@ function Articles(props) {
     const classes=useStyle()
 
     const [toolTip,setToolTip]=useState(false)
+    const [dummyTooltip,setDummyTooltip]=useState(false)
 
     const fullContent=<FullArticle/>
     const titleContent=<React.Fragment>
@@ -154,11 +179,11 @@ function Articles(props) {
             </Button>
         </div>
         <div style={{display:'flex',alignItems:'center',marginTop:'3px',marginBottom:'10px'}}>
-            <Button variant={'contained'} disableElevation className={classes.agreeButton} disableRipple>
+            <Button variant={'contained'} disableElevation className={props.agree?classes.agreedButton:classes.agreeButton} disableRipple onClick={props.agreePressed}>
                 <ArrowDropUpIcon/>
-                赞同 937
+                {props.agree?'已赞同 939':'赞同 938'}
             </Button>
-            <Button variant={'contained'} disableElevation className={classes.disagreeButton} disableRipple>
+            <Button variant={'contained'} disableElevation className={props.disagree?classes.disagreedButton:classes.disagreeButton} disableRipple onClick={props.disagreePressed}>
                 <ArrowDropDownIcon/>
             </Button>
             <Button className={classes.iconButton} style={{marginLeft:'16px'}} disableRipple>
@@ -194,10 +219,73 @@ function Articles(props) {
                     }
                              interactive
                              arrow
-                             open={toolTip}
                              classes={{tooltip:classes.toolTip,arrow:classes.arrow}}
                     >
-                        <Button className={classes.iconButton} style={{minWidth:'36px'}} disableRipple onClick={()=>{setToolTip(!toolTip)}}>
+                        <Button className={classes.iconButton} style={{minWidth:'36px'}} disableRipple onClick={()=>{setToolTip(true)}}>
+                            <MoreHorizIcon style={{fontSize:'15px'}}/>
+                        </Button>
+                    </Tooltip>
+                </div>
+            </ClickAwayListener>
+        </div>
+    </React.Fragment>
+
+    const dummyTitleContent=<React.Fragment>
+        <div className={classes.titleContent}>
+            <Button className={classes.textButton} disableRipple onClick={props.openDummyArticle}>
+                <div className={classes.titleText} style={{width:'auto',margin:'6px 0',height:'auto'}}>
+                    {'算上神游，这是大陆玩家被骗的第4次了。不管国行有没有后门，国行永远是劣于外版的残废主机，这个现实无法改变。最大的悲剧是，受益于国行的人都是买外版主机，因为国行让外版降价了，因为建立了大陆服务器。而买国行的人全都吃亏了。没游戏，没网络，被厂商涮，被外版用户嘲笑。'.substring(0,70)+'...'}
+                    <Button className={classes.button} disableRipple onClick={props.openDummyArticle}>
+                        阅读全文
+                        <KeyboardArrowDownIcon/>
+                    </Button>
+                </div>
+            </Button>
+        </div>
+        <div style={{display:'flex',alignItems:'center',marginTop:'3px',marginBottom:'10px'}}>
+            <Button variant={'contained'} disableElevation className={props.dummyAgree?classes.agreedButton:classes.agreeButton} disableRipple onClick={props.dummyAgreePressed}>
+                <ArrowDropUpIcon/>
+                {props.dummyAgree?'已赞同 441':'赞同 440'}
+            </Button>
+            <Button variant={'contained'} disableElevation className={props.dummyDisagree?classes.disagreedButton:classes.disagreeButton} disableRipple onClick={props.dummyDisagreePressed}>
+                <ArrowDropDownIcon/>
+            </Button>
+            <Button className={classes.iconButton} style={{marginLeft:'16px'}} disableRipple>
+                <ChatBubbleIcon style={{fontSize:'15px',marginRight:'6px'}}/>
+                90 条评论
+            </Button>
+            <Button className={classes.iconButton} disableRipple>
+                <SendIcon style={{fontSize:'15px',marginRight:'6px'}}/>
+                分享
+            </Button>
+            <Button className={classes.iconButton} disableRipple>
+                <StarIcon style={{fontSize:'15px',marginRight:'6px'}}/>
+                收藏
+            </Button>
+            <Button className={classes.iconButton} disableRipple>
+                <FavoriteIcon style={{fontSize:'15px',marginRight:'6px'}}/>
+                喜欢
+            </Button>
+            <ClickAwayListener onClickAway={()=>{setDummyTooltip(false)}}>
+                <div>
+                    <Tooltip title={
+                        <List style={{padding:'0'}}>
+                            <ListItem style={{fontSize:'14px',color:'#8590a6'}} button>
+                                没有帮助
+                            </ListItem>
+                            <ListItem style={{fontSize:'14px',color:'#8590a6'}} button>
+                                举报
+                            </ListItem>
+                            <ListItem style={{fontSize:'14px',color:'#8590a6'}} button>
+                                不感兴趣
+                            </ListItem>
+                        </List>
+                    }
+                             interactive
+                             arrow
+                             classes={{tooltip:classes.toolTip,arrow:classes.arrow}}
+                    >
+                        <Button className={classes.iconButton} style={{minWidth:'36px'}} disableRipple onClick={()=>{setDummyTooltip(true)}}>
                             <MoreHorizIcon style={{fontSize:'15px'}}/>
                         </Button>
                     </Tooltip>
@@ -212,19 +300,54 @@ function Articles(props) {
                 <List style={{padding:'0'}}>
                     <ListItem className={classes.listNav}>
                         <Tabs value={0} indicatorColor={'none'}>
-                            <Tab label={'推荐'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}}/>
-                            <Tab label={'关注'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}}/>
-                            <Tab label={'热榜'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}}/>
+                            <Tab label={'推荐'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'/'}/>
+                            <Tab label={'关注'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'/subscribed'}/>
+                            <Tab label={'热榜'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'trending'}/>
                         </Tabs>
                     </ListItem>
                     <Divider style={{background:'#f0f2f7'}}/>
-                    <ListItem>
+                    <ListItem style={{paddingLeft:'22px'}}>
                         <div style={{marginTop:'6px'}}>
                             <div className={classes.title}>索尼 7506 耳机真的那么棒吗？</div>
                             {props.fullArticle?fullContent:titleContent}
                         </div>
                     </ListItem>
-                    <Divider/>
+                    <Divider style={{background:'#f0f2f7'}}/>
+                    <ListItem style={{paddingLeft:'22px'}}>
+                        <div style={{marginTop:'6px'}}>
+                            <div className={classes.title}>微软和索尼重新对中国国行游戏主机玩家开放“后门”的可能性有多少？</div>
+                            {props.dummyArticle?<DummyFullArticle/>:dummyTitleContent}
+                        </div>
+                    </ListItem>
+                    <Divider style={{background:'#f0f2f7'}}/>
+                    <ListItem style={{paddingLeft:'22px'}}>
+                        <div style={{marginTop:'6px'}}>
+                            <div className={classes.title}>微软和索尼重新对中国国行游戏主机玩家开放“后门”的可能性有多少？</div>
+                            {props.dummyArticle?<DummyFullArticle/>:dummyTitleContent}
+                        </div>
+                    </ListItem>
+                    <Divider style={{background:'#f0f2f7'}}/>
+                    <ListItem style={{paddingLeft:'22px'}}>
+                        <div style={{marginTop:'6px'}}>
+                            <div className={classes.title}>微软和索尼重新对中国国行游戏主机玩家开放“后门”的可能性有多少？</div>
+                            {props.dummyArticle?<DummyFullArticle/>:dummyTitleContent}
+                        </div>
+                    </ListItem>
+                    <Divider style={{background:'#f0f2f7'}}/>
+                    <ListItem style={{paddingLeft:'22px'}}>
+                        <div style={{marginTop:'6px'}}>
+                            <div className={classes.title}>微软和索尼重新对中国国行游戏主机玩家开放“后门”的可能性有多少？</div>
+                            {props.dummyArticle?<DummyFullArticle/>:dummyTitleContent}
+                        </div>
+                    </ListItem>
+                    <Divider style={{background:'#f0f2f7'}}/>
+                    <ListItem style={{paddingLeft:'22px'}}>
+                        <div style={{marginTop:'6px'}}>
+                            <div className={classes.title}>微软和索尼重新对中国国行游戏主机玩家开放“后门”的可能性有多少？</div>
+                            {props.dummyArticle?<DummyFullArticle/>:dummyTitleContent}
+                        </div>
+                    </ListItem>
+                    <Divider style={{background:'#f0f2f7'}}/>
                 </List>
             </Paper>
         </React.Fragment>
@@ -233,14 +356,24 @@ function Articles(props) {
 
 const mapStateToProps=(state)=>{
     return{
-        fullArticle:state.frontPage.fullArticle
+        fullArticle:state.frontPage.fullArticle,
+        dummyArticle:state.frontPage.dummyArticle,
+        agree:state.frontPage.agree,
+        disagree:state.frontPage.disagree,
+        dummyAgree:state.frontPage.dummyAgree,
+        dummyDisagree:state.frontPage.dummyDisagree
     }
 }
 
 const mapDispatchToProps=(dispatch)=>{
     return{
         openFullArticle:()=>{dispatch(action.openFullArticle())},
-        closeFullArticle:()=>{dispatch(action.closeFullArticle())}
+        closeFullArticle:()=>{dispatch(action.closeFullArticle())},
+        openDummyArticle:()=>{dispatch(action.openDummyArticle())},
+        agreePressed:()=>{dispatch(action.agree())},
+        disagreePressed:()=>{dispatch(action.disagree())},
+        dummyAgreePressed:()=>{dispatch(action.dummyAgree())},
+        dummyDisagreePressed:()=>{dispatch(action.dummyDisagree())},
     }
 }
 

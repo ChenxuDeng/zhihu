@@ -4,6 +4,8 @@ import {theme} from '../src/theme/theme'
 import Navigation from "./components/navigation/navigation";
 import {Switch,Route,BrowserRouter} from "react-router-dom";
 import FrontPage from "./components/frontPage/frontPage";
+import SubscribedPage from "./components/subscribedPage/subscribedPage";
+import TrendingPage from "./components/trendingPage/trendingPage";
 
 function App(props) {
 
@@ -13,6 +15,8 @@ function App(props) {
               <ThemeProvider theme={theme}>
                   <Navigation/>
                   <Switch>
+                      <Route path={'/trending'} component={TrendingPage}/>
+                      <Route path={'/subscribed'} component={SubscribedPage}/>
                       <Route path={'/'} component={FrontPage}/>
                   </Switch>
               </ThemeProvider>

@@ -37,7 +37,6 @@ function FrontPage(props) {
             wrapper:{
                 background:'#f6f6f6',
                 paddingTop:'10px',
-
             }
         }
     })

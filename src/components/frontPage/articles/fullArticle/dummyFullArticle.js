@@ -1,10 +1,6 @@
-import React,{useState,useEffect} from 'react';
-import aurthor from '../../../../assets/aurthor.jpg'
-import renzheng from '../../../../assets/renzheng.svg'
-import img1 from '../../../../assets/img1.jpg'
-import img2 from '../../../../assets/img2.jpg'
-import titleImg from '../../../../assets/titleImg.jpg'
-import img4 from '../../../../assets/img4.jpg'
+import React, {useEffect, useState} from 'react';
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Slide from "@material-ui/core/Slide";
 import Button from "@material-ui/core/Button";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -17,16 +13,15 @@ import Tooltip from "@material-ui/core/Tooltip";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import * as action from '../../../../store/action/index'
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import renzheng from "../../../../assets/renzheng.svg";
+import author2 from '../../../../assets/author2.jpg'
+import * as action from "../../../../store/action";
 import {connect} from 'react-redux'
-import Slide from "@material-ui/core/Slide";
 import {Divider} from "@material-ui/core";
-import detailBackground from '../../../../assets/detailBackground.jpg'
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from "@material-ui/icons/Add";
 
-function FullArticle(props) {
+function DummyFullArticle(props) {
     useEffect(()=>{
         window.addEventListener('scroll',scrollHandler)
         return ()=>{
@@ -35,10 +30,10 @@ function FullArticle(props) {
     },[])
 
     const scrollHandler=()=>{
-        const article1=document.getElementById('article1')
-        if(window.scrollY+726>=article1.offsetHeight){
+        const article2=document.getElementById('article2')
+        if(window.scrollY+726>=article2.offsetHeight){
             setBottomBar(false)
-        }else if(window.scrollY+726<=article1.offsetHeight){
+        }else if(window.scrollY+726<=article2.offsetHeight){
             setBottomBar(true)
         }
     }
@@ -234,7 +229,7 @@ function FullArticle(props) {
                         </Tooltip>
                     </div>
                 </ClickAwayListener>
-                <Button className={classes.iconButton} disableRipple style={{marginLeft:'auto'}} onClick={()=>{props.closeFullArticle();}}>
+                <Button className={classes.iconButton} disableRipple style={{marginLeft:'auto'}} onClick={()=>{props.closeDummyArticle();}}>
                     收起
                     <ExpandLessIcon style={{fontSize:'15px',marginRight:'6px'}}/>
                 </Button>
@@ -244,27 +239,24 @@ function FullArticle(props) {
 
     return (
         <React.Fragment>
-            <div id={'article1'}>
+            <div id={'article2'}>
                 <div style={{display:'flex',alignItems:'center',marginTop:'10px'}}>
                     <Tooltip title={
                         <List style={{padding:'0'}}>
-                            <ListItem style={{width:'360px',padding:'0'}} disableGutters>
-                                    <img src={detailBackground} alt='detailBackground' style={{width:'360px'}}/>
-                            </ListItem>
                             <ListItem style={{width:'360px',height:'66px'}}>
                                 <div style={{display:'flex',alignItems:'center',position:'relative'}}>
-                                    <img src={aurthor} alt='aurthor' style={{height:'72px',width:'72px',position:'absolute',top:'-30px',borderRadius:'3px',border:'2px solid white'}}/>
+                                    <img src={author2} alt='author2' style={{height:'72px',width:'72px',position:'absolute',top:'-30px',borderRadius:'3px',border:'2px solid white'}}/>
                                     <div style={{marginLeft:'85px',lineHeight:1.5}}>
-                                        <div style={{fontSize:'16px',color:'#121212'}}>堂主</div>
-                                        <div style={{fontSize:'14px',color:'#121212'}}>不為苟且得意。不為黑暗辯護。</div>
+                                        <div style={{fontSize:'16px',color:'#121212'}}>孟德尔</div>
+                                        <div style={{fontSize:'14px',color:'#121212'}}>氷山一角</div>
                                     </div>
                                 </div>
                             </ListItem>
                             <Divider style={{background:'#f0f2f7'}}/>
                             <ListItem style={{width:'360px',height:'46px'}}>
-                                <div style={{display:'flex',alignItems:'center'}}>
-                                    <img src={renzheng} alt='renzheng' style={{height:'18px',width:'18px'}}/>
-                                    <div style={{fontSize:'14px',color:'#444',fontWeight:'600'}}>科技盐究员</div>
+                                <div style={{display:'flex'}}>
+                                    <img src={renzheng} alt='renzheng' style={{height:'18px',width:'18px',marginRight:'6px'}}/>
+                                    <div style={{fontSize:'14px',color:'#444',fontWeight:'600'}}>单机游戏、家用游戏机、游戏 等 6 个话题的优秀回答者</div>
                                 </div>
                             </ListItem>
                             <Divider style={{background:'#f0f2f7'}}/>
@@ -275,7 +267,7 @@ function FullArticle(props) {
                                             <span style={{fontSize:'14px',color:'#8590a6'}}>回答</span>
                                         </div>
                                         <div>
-                                            <span style={{fontSize:'19px',fontWeight:'700'}}>1,470</span>
+                                            <span style={{fontSize:'19px',fontWeight:'700'}}>10,078</span>
                                         </div>
                                     </div>
                                 </Button>
@@ -285,7 +277,7 @@ function FullArticle(props) {
                                             <span style={{fontSize:'14px',color:'#8590a6'}}>文章</span>
                                         </div>
                                         <div>
-                                            <span style={{fontSize:'19px',fontWeight:'700'}}>67</span>
+                                            <span style={{fontSize:'19px',fontWeight:'700'}}>154</span>
                                         </div>
                                     </div>
                                 </Button>
@@ -295,7 +287,7 @@ function FullArticle(props) {
                                             <span style={{fontSize:'14px',color:'#8590a6'}}>关注者</span>
                                         </div>
                                         <div>
-                                            <span style={{fontSize:'19px',fontWeight:'700'}}>123,452</span>
+                                            <span style={{fontSize:'19px',fontWeight:'700'}}>879,297</span>
                                         </div>
                                     </div>
                                 </Button>
@@ -316,89 +308,31 @@ function FullArticle(props) {
                              classes={{tooltip:classes.toolTip}}
                              placement={'bottom-start'}
                     >
-                        <img src={aurthor} alt='aurthor' style={{height:'38px',width:'38px'}}/>
+                    <img src={author2} alt='author2' style={{height:'38px',width:'38px'}}/>
                     </Tooltip>
                     <div style={{marginLeft:'10px'}}>
                         <div style={{display:'flex',alignItems:'center'}}>
-                            <div style={{fontSize:'14px',color:'#444',fontWeight:'600'}}>堂主</div>
+                            <div style={{fontSize:'14px',color:'#444',fontWeight:'600'}}>孟德尔</div>
                             <img src={renzheng} alt='renzheng' style={{height:'18px',width:'18px'}}/>
                         </div>
-                        <div style={{fontSize:'14px',color:'#646464'}}>科技盐究员</div>
+                        <div style={{fontSize:'14px',color:'#646464'}}>氷山一角</div>
                     </div>
                 </div>
                 <div style={{fontSize:'14px',color:'#8590a6',marginTop:'10px'}}>937 人赞同了该回答</div>
                 <div style={{marginTop:'6px',fontSize:'15px'}}>
-                    真的。
+                    算上神游，这是大陆玩家被骗的第4次了。
                 </div>
                 <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    而且不止7506，任何一款二三十年前上市的耳机型号，如果今天还在产在销，几乎无一例外都是很强的。
+                    不管国行有没有后门，国行永远是劣于外版的残废主机，这个现实无法改变。
                 </div>
                 <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    最近连着在私信和值乎里面被问到7506的事情，我才发现原来7506真的已经热到不行，京东上都回到1200价位了。吃惊！
+                    最大的悲剧是，受益于国行的人都是买外版主机，因为国行让外版降价了，因为建立了大陆服务器。而买国行的人全都吃亏了。没游戏，没网络，被厂商涮，被外版用户嘲笑。
                 </div>
                 <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    对于预算充裕点的朋友，我建议索性将逼格进一步提升，去玩CD900st，让那些刚刚追上7506的疯狂索粉再次傻眼～～
+                    我觉得，不管国行有没有意义，这种靠牺牲大部分来服务少数人的模式，是不应该存在的。
                 </div>
                 <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    关于CD900st/7506/V6的关系，如果真的搞不清楚，其实也无所谓。反正你只要知道CD900st是Sony整个历史上最牛逼的监听耳机就够了。实在是关心音质差别的话，稍微去看一下这个 7506和CD900st的小讨论（英文）  和这个 家族史（英文） 增加些日常谈资也行。别人问你时就算答不上来，也可以轻蔑地一笑而过，表示不屑跟他们解释——你连CD900st跟7506的差别都不知道，也配来跟我聊天？
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    在整个MDR监听耳机家族里面，别的型号都是「Sony消费电子」的工程师团队负责声音调校，唯独只有CD900st这一只是「Sony娱乐/哥伦比亚唱片」的工程师团队负责声音调校的哦。
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    然后日本几乎所有唱片公司、录音棚都有在用CD900st做监听哦。其实放眼全亚洲也是很多录音棚在用哦。
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    那些听ACG/J-pop的，你听的音乐九成九就是用CD900st这副耳机混录制作的有没有！买了CD900st，你就跟音乐制作人、录音师、唱片歌手们在用同一副耳机有没有！！从此以后你听到的就是真正彻底百分百呈现音乐制作人、录音师、唱片歌手们原始创作意图的完美声音有没有！！！
-                </div>
-                <img src={img1} alt='img1' style={{width:'654px',marginTop:'20px'}}/>
-                <div style={{marginTop:'6px',fontSize:'13.9px',color:'#999999',textAlign:'center'}}>
-                    整个家族MDR-CD700, MDR-CD900, MDR-V6, MDR-V7, MDR-7506, MDR-CD900ST
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    而且我跟你讲哦，7506有日本产美国产中国产泰国产（现在基本上是泰国产），然鹅CD900st三十年来只有日本产哦，还只在日本本土销售哦，你只能去日亚买或者托人从日本人肉代购哦~
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    哇~那这么牛逼的耳机你说要多少钱？官方建议零售价18000日元，日本亚马逊/街边数码店大概15000日元，换成人民币一千块有找。
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    还在等什么？
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    你现在是不是觉得跟风去买一千两百块的京东7506有点不划算？
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px'}}>
-                    再进阶的话，
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    还可以换一个小羊皮的BrainWavz Audio专为MDR系列耳机定制的小羊皮惰性海绵耳垫 。或许也可以试试同厂另一款打孔人造皮的耳垫，理论上更透气些……港真我还没试过哈哈
-                </div>
-                <img src={titleImg} alt='titleImg' style={{width:'654px',marginTop:'20px'}}/>
-                <div style={{marginTop:'6px',fontSize:'13.9px',color:'#999999',textAlign:'center'}}>
-                    BrainWavz Audio专为MDR系列耳机定制的小羊皮惰性海绵耳垫
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    以及毫无疑问随身必备的高级纯金属制6.35mm母转3.5mm公插——比方说Ranko RCP-200/2000，或者Furutech CF35g/r 和 F35g/r ——不然怎么能够插到你的DAP上呢是吧。
-                </div>
-                <img src={img2} alt='img2' style={{width:'654px',marginTop:'20px'}}/>
-                <div style={{marginTop:'6px',fontSize:'13.9px',color:'#999999',textAlign:'center'}}>
-                    Ranko转换插，高纯度OFHC磷青纯铜，镀5.5um厚铑，极温-196c冷冻固化处理
-                </div>
-                <img src={img4} alt='img4' style={{width:'654px',marginTop:'20px'}}/>
-                <div style={{marginTop:'6px',fontSize:'13.9px',color:'#999999',textAlign:'center'}}>
-                    Furutech 古河 CF35 Rhodium 镀铑转换插
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px'}}>
-                    还要啥自行车！
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px'}}>
-                    我不是在跟你开玩笑！
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px',lineHeight:1.6}}>
-                    如果说一辈子只能买一副监听耳机，并且已经买不到DT48了的话，那唯一能买的就必定是CD900st啦！
-                </div>
-                <div style={{marginTop:'20px',fontSize:'15px'}}>
-                    （友情提示：买耳机有风险，入手请谨慎。）
+                    最好是国行出了但是不卖。这样就没人会受害。外版该有的好处大部分还有。
                 </div>
                 <div style={{display:'flex',alignItems:'center',marginTop:'20px',marginBottom:'10px'}}>
                     <Button variant={'contained'} disableElevation className={classes.agreeButton} disableRipple>
@@ -450,7 +384,7 @@ function FullArticle(props) {
                             </Tooltip>
                         </div>
                     </ClickAwayListener>
-                    <Button className={classes.iconButton} disableRipple style={{marginLeft:'auto'}} onClick={()=>{props.closeFullArticle()}}>
+                    <Button className={classes.iconButton} disableRipple style={{marginLeft:'auto'}} onClick={()=>{props.closeDummyArticle()}}>
                         收起
                         <ExpandLessIcon style={{fontSize:'15px',marginRight:'6px'}}/>
                     </Button>
@@ -463,14 +397,14 @@ function FullArticle(props) {
 
 const mapStateToProps=(state)=>{
     return{
-        fullArticle:state.frontPage.fullArticle,
+        dummyArticle:state.frontPage.dummyArticle
     }
 }
 
 const mapDispatchToProps=(dispatch)=>{
     return{
-        closeFullArticle:()=>{dispatch(action.closeFullArticle())}
+        closeDummyArticle:()=>{dispatch(action.closeDummyArticle())}
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(FullArticle);
+export default connect(mapStateToProps,mapDispatchToProps)(DummyFullArticle);
