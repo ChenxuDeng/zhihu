@@ -2,6 +2,7 @@ import React from 'react';
 import Container from "@material-ui/core/Container";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Articles from "./articles/articles";
+import SideBarTop from "../sideBarTop/sideBarTop";
 
 function FrontPage(props) {
     const useStyle=makeStyles((theme)=>{
@@ -46,7 +47,10 @@ function FrontPage(props) {
         <React.Fragment>
             <div className={classes.wrapper}>
                 <Container maxWidth={'md'} classes={{maxWidthMd:classes.container}}>
-                    <Articles/>
+                    <div style={{display:'flex'}}>
+                        <Articles/>
+                        <SideBarTop/>
+                    </div>
                 </Container>
             </div>
         </React.Fragment>

@@ -163,7 +163,7 @@ function FullArticle(props) {
                 background:'white',
                 width:'654px',
                 padding:'10px 20px',
-                marginLeft:'-16px',
+                marginLeft:'-22px',
                 position:'fixed',
                 bottom:'0'
             },

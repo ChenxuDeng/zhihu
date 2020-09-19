@@ -1,30 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import FullArticle from "../frontPage/articles/fullArticle/fullArticle";
-import titleImg from "../../assets/titleImg.jpg";
-import Button from "@material-ui/core/Button";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
-import SendIcon from "@material-ui/icons/Send";
-import StarIcon from "@material-ui/icons/Star";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Tooltip from "@material-ui/core/Tooltip";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import {Link} from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
-import ListAltIcon from "@material-ui/icons/ListAlt";
 import * as action from "../../store/action";
 import {connect} from 'react-redux'
 import BatteryAlertIcon from '@material-ui/icons/BatteryAlert';
+import SideBarTop from "../sideBarTop/sideBarTop";
 
 function TrendingPage(props) {
     const useStyle=makeStyles((theme)=>{
@@ -171,26 +158,29 @@ function TrendingPage(props) {
         <React.Fragment>
             <div className={classes.wrapper}>
                 <Container maxWidth={'md'} classes={{maxWidthMd:classes.container}}>
-                    <Paper className={classes.paper} elevation={0}>
-                        <List style={{padding:'0'}}>
-                            <ListItem className={classes.listNav}>
-                                <Tabs value={2} indicatorColor={'none'}>
-                                    <Tab label={'推荐'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'/'}/>
-                                    <Tab label={'关注'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'/subscribed'}/>
-                                    <Tab label={'热榜'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'trending'}/>
-                                </Tabs>
-                            </ListItem>
-                            <Divider style={{background:'#f0f2f7'}}/>
-                            <ListItem style={{justifyContent:'center'}}>
-                                <div style={{textAlign:'center'}}>
-                                    <BatteryAlertIcon style={{width:'130px',height:'100px',color:'rgb(235, 238, 245)'}}/>
-                                    <div style={{fontSize:'15px',color:'grey'}}>
-                                        这网站 <span style={{fontWeight:'bold',fontSize:'17px'}}>好难...</span>
+                    <div style={{display:'flex'}}>
+                        <Paper className={classes.paper} elevation={0}>
+                            <List style={{padding:'0'}}>
+                                <ListItem className={classes.listNav}>
+                                    <Tabs value={2} indicatorColor={'none'}>
+                                        <Tab label={'推荐'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'/'}/>
+                                        <Tab label={'关注'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'/subscribed'}/>
+                                        <Tab label={'热榜'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'trending'}/>
+                                    </Tabs>
+                                </ListItem>
+                                <Divider style={{background:'#f0f2f7'}}/>
+                                <ListItem style={{justifyContent:'center'}}>
+                                    <div style={{textAlign:'center'}}>
+                                        <BatteryAlertIcon style={{width:'130px',height:'100px',color:'rgb(235, 238, 245)'}}/>
+                                        <div style={{fontSize:'15px',color:'grey'}}>
+                                            这网站 <span style={{fontWeight:'bold',fontSize:'17px'}}>好难啊...</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </ListItem>
-                        </List>
-                    </Paper>
+                                </ListItem>
+                            </List>
+                        </Paper>
+                        <SideBarTop/>
+                    </div>
                 </Container>
             </div>
         </React.Fragment>
