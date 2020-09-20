@@ -6,7 +6,8 @@ const initialState={
     agree:false,
     disagree:false,
     dummyAgree:false,
-    dummyDisagree:false
+    dummyDisagree:false,
+    index:0
 }
 
 const frontPage=(state=initialState,action)=>{
@@ -55,6 +56,22 @@ const frontPage=(state=initialState,action)=>{
                 dummyDisagree:!state.dummyDisagree,
                 dummyAgree:false
             }
+        case(actionType.RECOMMEND_ONCLICK):
+            return{
+                ...state,
+                index:0
+            }
+        case(actionType.SUBSCRIBED_ONCLICK):
+            return{
+                ...state,
+                index:1
+            }
+        case(actionType.TRENDING_ONCLICK):
+            return{
+                ...state,
+                index:2
+            }
+
         default:
             return state
     }

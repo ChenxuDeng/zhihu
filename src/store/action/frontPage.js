@@ -47,3 +47,21 @@ export const dummyDisagree=()=>{
         type:actionType.DUMMY_DISAGREE
     }
 }
+
+export const recommendOnClick=()=>{
+    return{
+        type:actionType.RECOMMEND_ONCLICK
+    }
+}
+
+export const subscribedOnClick=()=>{
+    return{
+        type:actionType.SUBSCRIBED_ONCLICK
+    }
+}
+
+export const trendingOnClick=()=>{
+    return{
+        type:actionType.TRENDING_ONCLICK
+    }
+}

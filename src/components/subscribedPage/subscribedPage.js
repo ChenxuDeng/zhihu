@@ -12,6 +12,7 @@ import {Link} from 'react-router-dom'
 import Container from "@material-ui/core/Container";
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import SideBarTop from "../sideBarTop/sideBarTop";
+import SideBarBottom from "../sideBarBottom/sideBarBottom";
 
 function SubscribedPage(props) {
     const useStyle=makeStyles((theme)=>{
@@ -163,9 +164,29 @@ function SubscribedPage(props) {
                             <List style={{padding:'0'}}>
                                 <ListItem className={classes.listNav}>
                                     <Tabs value={1} indicatorColor={'none'}>
-                                        <Tab label={'推荐'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'/'}/>
-                                        <Tab label={'关注'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'/subscribed'}/>
-                                        <Tab label={'热榜'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'trending'}/>
+                                        <Tab label={'推荐'}
+                                             className={classes.tab}
+                                             disableRipple
+                                             classes={{selected:classes.tabSelected}}
+                                             component={Link} to={'/'}
+                                             onClick={props.recommendOnClick}
+                                        />
+                                        <Tab label={'关注'}
+                                             className={classes.tab}
+                                             disableRipple
+                                             classes={{selected:classes.tabSelected}}
+                                             component={Link}
+                                             to={'/subscribed'}
+                                             onClick={props.subscribedOnClick}
+                                        />
+                                        <Tab label={'热榜'}
+                                             className={classes.tab}
+                                             disableRipple
+                                             classes={{selected:classes.tabSelected}}
+                                             component={Link}
+                                             to={'trending'}
+                                             onClick={props.trendingOnClick}
+                                        />
                                     </Tabs>
                                 </ListItem>
                                 <Divider style={{background:'#f0f2f7'}}/>
@@ -179,7 +200,11 @@ function SubscribedPage(props) {
                                 </ListItem>
                             </List>
                         </Paper>
-                        <SideBarTop/>
+                        <div>
+                            <SideBarTop/>
+                            <SideBarBottom/>
+                        </div>
+
                     </div>
                 </Container>
             </div>
@@ -207,6 +232,9 @@ const mapDispatchToProps=(dispatch)=>{
         disagreePressed:()=>{dispatch(action.disagree())},
         dummyAgreePressed:()=>{dispatch(action.dummyAgree())},
         dummyDisagreePressed:()=>{dispatch(action.dummyDisagree())},
+        recommendOnClick:()=>{dispatch(action.recommendOnClick())},
+        subscribedOnClick:()=>{dispatch(action.subscribedOnClick())},
+        trendingOnClick:()=>{dispatch(action.trendingOnClick())}
     }
 }
 

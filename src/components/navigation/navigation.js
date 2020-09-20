@@ -33,6 +33,8 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import {connect} from 'react-redux'
 import * as action from '../../store/action/index'
+import Slide from "@material-ui/core/Slide";
+import {Link} from 'react-router-dom'
 
 function Navigation(props) {
     const useStyle=makeStyles((theme)=>{
@@ -229,6 +231,13 @@ function Navigation(props) {
                 color:'#8590a6',
                 marginLeft:'23px',
                 cursor:'pointer'
+            },
+            toolBar:theme.mixins.toolbar,
+            logoButton:{
+                padding:'0',
+                '&:hover':{
+                    background:'transparent'
+                }
             }
         }
     })
@@ -323,167 +332,174 @@ function Navigation(props) {
 
     return (
         <React.Fragment>
-            <AppBar position={'sticky'} className={classes.appbar} elevation={0}>
-                <Container maxWidth={'md'} classes={{maxWidthMd:classes.container}}>
-                    <Toolbar classes={{regular:classes.toolbar}} disableGutters>
-                        <img src={logo} alt='logo' className={classes.logo}/>
-                        <Tabs className={classes.tabs} value={index} classes={{indicator:classes.indicator}}>
-                            <Tab label={'首页'}
-                                 className={classes.tab}
-                                 classes={{wrapper:classes.tabWrapper,selected:classes.selected}}
-                                 onClick={()=>{setIndex(0)}}
-                                 disableRipple
-                            />
-                            <Tab label={'发现'}
-                                 className={classes.tab}
-                                 classes={{wrapper:classes.tabWrapper,selected:classes.selected}}
-                                 style={{marginLeft:'20px'}}
-                                 onClick={()=>{setIndex(1)}}
-                                 disableRipple
-                            />
-                            <Tab label={'等你回答'}
-                                 className={classes.tab}
-                                 classes={{wrapper:classes.tabWrapper,selected:classes.selected}}
-                                 style={{marginLeft:'20px'}}
-                                 onClick={()=>{setIndex(2)}}
-                                 disableRipple
-                            />
-                        </Tabs>
-                        <ClickAwayListener onClickAway={()=>{setFocus(false)}}>
-                            <Paper elevation={0} className={focus?classes.focusPaper:classes.paper}>
-                                <InputBase className={classes.inputBase} placeholder={'搜索...'} onFocus={()=>{setFocus(true)}}/>
-                                <SearchIcon className={classes.searchIcon}/>
-                            </Paper>
-                        </ClickAwayListener>
-                        <Grow in={!focus}>
-                            <Button className={classes.button}>
-                                提问
+            <AppBar position={'fixed'} className={classes.appbar} elevation={0}>
+                <Slide in={props.navigation}>
+                    <Container maxWidth={'md'} classes={{maxWidthMd:classes.container}}>
+                        <Toolbar classes={{regular:classes.toolbar}} disableGutters>
+                            <Button className={classes.logoButton} disableRipple component={Link} to={'/'}>
+                                <img src={logo} alt='logo' className={classes.logo}/>
                             </Button>
-                        </Grow>
-                        <div style={{display:'flex',alignItems:'center',marginLeft:'auto'}}>
-                            <ClickAwayListener onClickAway={props.closeNotification}>
-                                <div>
-                                    <Tooltip title={
-                                        <React.Fragment>
-                                            <List style={{padding:'0',height:'50px'}}>
-                                                <ListItem className={classes.msgListItem} disableRipple>
-                                                    <Button className={classes.bellButton1} disableRipple onClick={props.openQuestion}>
-                                                        <FormatListBulletedIcon className={props.question?classes.bellIconSelected:classes.bellIcon1}/>
-                                                    </Button>
-                                                    <Button className={classes.bellButton2} disableRipple onClick={props.openMessage}>
-                                                        <GroupIcon className={props.message?classes.bellIconSelected:classes.bellIcon2}/>
-                                                    </Button>
-                                                    <Button className={classes.bellButton3} disableRipple onClick={props.openLike}>
-                                                        <FavoriteIcon className={props.like?classes.bellIconSelected:classes.bellIcon3}/>
-                                                    </Button>
-                                                </ListItem>
-                                                <Divider/>
-                                            </List>
-                                            {content}
-                                            <Divider/>
-                                            <List style={{padding:'0'}}>
-                                                <ListItem style={{height:'40px'}}>
-                                                    <Button className={classes.msgButton} disableRipple style={{marginLeft:'-10px'}}>
-                                                        <SettingsIcon style={{fontSize:'16px',marginRight:'3px',marginBottom:'2px'}}/>
-                                                        设置
-                                                    </Button>
-                                                    <Button className={classes.msgButton} disableRipple style={{marginLeft:'auto',marginRight:'-2px'}}>
-                                                        查看全部通知
-                                                    </Button>
-                                                </ListItem>
-                                            </List>
-                                        </React.Fragment>
-                                    }
-                                             interactive
-                                             arrow
-                                             disableFocusListener
-                                             disableHoverListener
-                                             disableTouchListener
-                                             open={props.notification}
-                                             classes={{tooltip:classes.msgTooltip,arrow:classes.tooltipArrow}}
-                                    >
-                                        <Badge badgeContent={1} color={'error'} classes={{badge:classes.badge}}>
-                                            <NotificationsIcon className={classes.rightIcons} onClick={props.openNotification}/>
-                                        </Badge>
-                                    </Tooltip>
-                                </div>
+                            <Tabs className={classes.tabs} value={index} classes={{indicator:classes.indicator}}>
+                                <Tab label={'首页'}
+                                     className={classes.tab}
+                                     classes={{wrapper:classes.tabWrapper,selected:classes.selected}}
+                                     onClick={()=>{setIndex(0)}}
+                                     disableRipple
+                                     component={Link}
+                                     to={'/'}
+                                />
+                                <Tab label={'发现'}
+                                     className={classes.tab}
+                                     classes={{wrapper:classes.tabWrapper,selected:classes.selected}}
+                                     style={{marginLeft:'20px'}}
+                                     onClick={()=>{setIndex(1)}}
+                                     disableRipple
+                                />
+                                <Tab label={'等你回答'}
+                                     className={classes.tab}
+                                     classes={{wrapper:classes.tabWrapper,selected:classes.selected}}
+                                     style={{marginLeft:'20px'}}
+                                     onClick={()=>{setIndex(2)}}
+                                     disableRipple
+                                />
+                            </Tabs>
+                            <ClickAwayListener onClickAway={()=>{setFocus(false)}}>
+                                <Paper elevation={0} className={focus?classes.focusPaper:classes.paper}>
+                                    <InputBase className={classes.inputBase} placeholder={'搜索你感兴趣的内容...'} onFocus={()=>{setFocus(true)}}/>
+                                    <SearchIcon className={classes.searchIcon}/>
+                                </Paper>
                             </ClickAwayListener>
-                            <ClickAwayListener onClickAway={props.closeMessageIcon}>
-                                <div>
-                                    <Tooltip title={
-                                        <React.Fragment>
-                                            <List style={{padding:'0',height:'400px'}}>
-                                                <ListItem className={classes.msgListItem} button disableRipple>
-                                                    我的私信
-                                                </ListItem>
+                            <Grow in={!focus}>
+                                <Button className={classes.button}>
+                                    提问
+                                </Button>
+                            </Grow>
+                            <div style={{display:'flex',alignItems:'center',marginLeft:'auto'}}>
+                                <ClickAwayListener onClickAway={props.closeNotification}>
+                                    <div>
+                                        <Tooltip title={
+                                            <React.Fragment>
+                                                <List style={{padding:'0',height:'50px'}}>
+                                                    <ListItem className={classes.msgListItem} disableRipple>
+                                                        <Button className={classes.bellButton1} disableRipple onClick={props.openQuestion}>
+                                                            <FormatListBulletedIcon className={props.question?classes.bellIconSelected:classes.bellIcon1}/>
+                                                        </Button>
+                                                        <Button className={classes.bellButton2} disableRipple onClick={props.openMessage}>
+                                                            <GroupIcon className={props.message?classes.bellIconSelected:classes.bellIcon2}/>
+                                                        </Button>
+                                                        <Button className={classes.bellButton3} disableRipple onClick={props.openLike}>
+                                                            <FavoriteIcon className={props.like?classes.bellIconSelected:classes.bellIcon3}/>
+                                                        </Button>
+                                                    </ListItem>
+                                                    <Divider/>
+                                                </List>
+                                                {content}
                                                 <Divider/>
-                                                <ListItem button disableRipple>
-                                                    <img src={guanjia} alt='guanjia' style={{height:'40px',width:'40px',padding:'10px 0'}}/>
-                                                    <div style={{marginLeft:'15px',marginTop:'3px'}}>
-                                                        <div style={{display:'flex',alignItems:'center'}}>
-                                                            <span style={{color:'#121212',fontSize:'15px'}}>知乎小管家</span>
-                                                            <img src={renzheng} alt='renzheng' style={{height:'20px',width:'20px'}}/>
+                                                <List style={{padding:'0'}}>
+                                                    <ListItem style={{height:'40px'}}>
+                                                        <Button className={classes.msgButton} disableRipple style={{marginLeft:'-10px'}}>
+                                                            <SettingsIcon style={{fontSize:'16px',marginRight:'3px',marginBottom:'2px'}}/>
+                                                            设置
+                                                        </Button>
+                                                        <Button className={classes.msgButton} disableRipple style={{marginLeft:'auto',marginRight:'-2px'}}>
+                                                            查看全部通知
+                                                        </Button>
+                                                    </ListItem>
+                                                </List>
+                                            </React.Fragment>
+                                        }
+                                                 interactive
+                                                 arrow
+                                                 disableFocusListener
+                                                 disableHoverListener
+                                                 disableTouchListener
+                                                 open={props.notification}
+                                                 classes={{tooltip:classes.msgTooltip,arrow:classes.tooltipArrow}}
+                                        >
+                                            <Badge badgeContent={1} color={'error'} classes={{badge:classes.badge}}>
+                                                <NotificationsIcon className={classes.rightIcons} onClick={props.openNotification}/>
+                                            </Badge>
+                                        </Tooltip>
+                                    </div>
+                                </ClickAwayListener>
+                                <ClickAwayListener onClickAway={props.closeMessageIcon}>
+                                    <div>
+                                        <Tooltip title={
+                                            <React.Fragment>
+                                                <List style={{padding:'0',height:'400px'}}>
+                                                    <ListItem className={classes.msgListItem} button disableRipple>
+                                                        我的私信
+                                                    </ListItem>
+                                                    <Divider/>
+                                                    <ListItem button disableRipple>
+                                                        <img src={guanjia} alt='guanjia' style={{height:'40px',width:'40px',padding:'10px 0'}}/>
+                                                        <div style={{marginLeft:'15px',marginTop:'3px'}}>
+                                                            <div style={{display:'flex',alignItems:'center'}}>
+                                                                <span style={{color:'#121212',fontSize:'15px'}}>知乎小管家</span>
+                                                                <img src={renzheng} alt='renzheng' style={{height:'20px',width:'20px'}}/>
+                                                            </div>
+                                                            <span style={{color:'#8590a6',fontSize:'14px',lineHeight:'23px'}}>亲爱的 知乎用户 你好: 欢迎你来到知乎...</span>
                                                         </div>
-                                                        <span style={{color:'#8590a6',fontSize:'14px',lineHeight:'23px'}}>亲爱的 知乎用户 你好: 欢迎你来到知乎...</span>
-                                                    </div>
-                                                </ListItem>
-                                            </List>
-                                            <Divider/>
+                                                    </ListItem>
+                                                </List>
+                                                <Divider/>
+                                                <List style={{padding:'0'}}>
+                                                    <ListItem style={{height:'40px'}}>
+                                                        <Button className={classes.msgButton} disableRipple style={{marginLeft:'-2px'}}>
+                                                            <CreateIcon style={{fontSize:'16px',marginRight:'3px',marginBottom:'2px'}}/>
+                                                            写新私信
+                                                        </Button>
+                                                        <Button className={classes.msgButton} disableRipple style={{marginLeft:'auto',marginRight:'-2px'}}>
+                                                            查看全部私信
+                                                        </Button>
+                                                    </ListItem>
+                                                </List>
+                                            </React.Fragment>
+                                        }
+                                                 interactive
+                                                 arrow
+                                                 open={props.messageIcon}
+                                                 classes={{tooltip:classes.msgTooltip,arrow:classes.tooltipArrow}}
+                                        >
+                                            <ChatBubbleIcon className={classes.chatBubbleIcon} onClick={props.openMessageIcon}/>
+                                        </Tooltip>
+                                    </div>
+                                </ClickAwayListener>
+                                <ClickAwayListener onClickAway={props.closeLikeIcon}>
+                                    <div>
+                                        <Tooltip title={
                                             <List style={{padding:'0'}}>
-                                                <ListItem style={{height:'40px'}}>
-                                                    <Button className={classes.msgButton} disableRipple style={{marginLeft:'-2px'}}>
-                                                        <CreateIcon style={{fontSize:'16px',marginRight:'3px',marginBottom:'2px'}}/>
-                                                        写新私信
-                                                    </Button>
-                                                    <Button className={classes.msgButton} disableRipple style={{marginLeft:'auto',marginRight:'-2px'}}>
-                                                        查看全部私信
-                                                    </Button>
+                                                <ListItem className={classes.listItem} button>
+                                                    <PersonIcon style={{fontSize:'20px',marginRight:'3px'}}/>
+                                                    <span style={{paddingTop:'2px'}}>我的主页</span>
+                                                </ListItem>
+                                                <ListItem className={classes.listItem} button>
+                                                    <SettingsIcon style={{fontSize:'18px',marginRight:'3px',marginLeft:'1px'}}/>
+                                                    <span style={{paddingTop:'2px'}}>设置</span>
+                                                </ListItem>
+                                                <ListItem className={classes.listItem} button>
+                                                    <PowerSettingsNewIcon style={{fontSize:'18px',marginRight:'3px',marginLeft:'1px'}}/>
+                                                    <span style={{paddingTop:'2px'}}>退出</span>
                                                 </ListItem>
                                             </List>
-                                        </React.Fragment>
-                                    }
-                                             interactive
-                                             arrow
-                                             open={props.messageIcon}
-                                             classes={{tooltip:classes.msgTooltip,arrow:classes.tooltipArrow}}
-                                    >
-                                        <ChatBubbleIcon className={classes.chatBubbleIcon} onClick={props.openMessageIcon}/>
-                                    </Tooltip>
-                                </div>
-                            </ClickAwayListener>
-                            <ClickAwayListener onClickAway={props.closeLikeIcon}>
-                                <div>
-                                    <Tooltip title={
-                                        <List style={{padding:'0'}}>
-                                            <ListItem className={classes.listItem} button>
-                                                <PersonIcon style={{fontSize:'20px',marginRight:'3px'}}/>
-                                                <span style={{paddingTop:'2px'}}>我的主页</span>
-                                            </ListItem>
-                                            <ListItem className={classes.listItem} button>
-                                                <SettingsIcon style={{fontSize:'18px',marginRight:'3px',marginLeft:'1px'}}/>
-                                                <span style={{paddingTop:'2px'}}>设置</span>
-                                            </ListItem>
-                                            <ListItem className={classes.listItem} button>
-                                                <PowerSettingsNewIcon style={{fontSize:'18px',marginRight:'3px',marginLeft:'1px'}}/>
-                                                <span style={{paddingTop:'2px'}}>退出</span>
-                                            </ListItem>
-                                        </List>
-                                    }
-                                             interactive
-                                             arrow
-                                             open={props.likeIcon}
-                                             classes={{tooltip:classes.tooltip,arrow:classes.tooltipArrow}}
-                                    >
-                                        <Avatar variant={'square'} style={{height:'30px',width:'30px',cursor:'pointer'}} onClick={props.openLikeIcon}>
-                                            <img src={avatar} alt='avatar' style={{height:'30px',width:'30px'}}/>
-                                        </Avatar>
-                                    </Tooltip>
-                                </div>
-                            </ClickAwayListener>
-                        </div>
-                    </Toolbar>
-                </Container>
+                                        }
+                                                 interactive
+                                                 arrow
+                                                 open={props.likeIcon}
+                                                 classes={{tooltip:classes.tooltip,arrow:classes.tooltipArrow}}
+                                        >
+                                            <Avatar variant={'square'} style={{height:'30px',width:'30px',cursor:'pointer'}} onClick={props.openLikeIcon}>
+                                                <img src={avatar} alt='avatar' style={{height:'30px',width:'30px'}}/>
+                                            </Avatar>
+                                        </Tooltip>
+                                    </div>
+                                </ClickAwayListener>
+                            </div>
+                        </Toolbar>
+                    </Container>
+                </Slide>
             </AppBar>
+            <div className={classes.toolBar}/>
         </React.Fragment>
     );
 }
@@ -495,7 +511,9 @@ const mapStateToProps=(state)=>{
         like:state.navigation.like,
         notification:state.navigation.notification,
         messageIcon:state.navigation.messageIcon,
-        likeIcon:state.navigation.likeIcon
+        likeIcon:state.navigation.likeIcon,
+        navigation:state.navigation.navigation,
+        scrolledNavigation:state.navigation.scrolledNavigation
     }
 }
 

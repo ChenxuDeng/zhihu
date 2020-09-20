@@ -300,9 +300,29 @@ function Articles(props) {
                 <List style={{padding:'0'}}>
                     <ListItem className={classes.listNav}>
                         <Tabs value={0} indicatorColor={'none'}>
-                            <Tab label={'推荐'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'/'}/>
-                            <Tab label={'关注'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'/subscribed'}/>
-                            <Tab label={'热榜'} className={classes.tab} disableRipple classes={{selected:classes.tabSelected}} component={Link} to={'trending'}/>
+                            <Tab label={'推荐'}
+                                 className={classes.tab}
+                                 disableRipple
+                                 classes={{selected:classes.tabSelected}}
+                                 component={Link} to={'/'}
+                                 onClick={props.recommendOnClick}
+                            />
+                            <Tab label={'关注'}
+                                 className={classes.tab}
+                                 disableRipple
+                                 classes={{selected:classes.tabSelected}}
+                                 component={Link}
+                                 to={'/subscribed'}
+                                 onClick={props.subscribedOnClick}
+                            />
+                            <Tab label={'热榜'}
+                                 className={classes.tab}
+                                 disableRipple
+                                 classes={{selected:classes.tabSelected}}
+                                 component={Link}
+                                 to={'trending'}
+                                 onClick={props.trendingOnClick}
+                            />
                         </Tabs>
                     </ListItem>
                     <Divider style={{background:'#f0f2f7'}}/>
@@ -310,6 +330,27 @@ function Articles(props) {
                         <div style={{marginTop:'6px'}}>
                             <div className={classes.title}>索尼 7506 耳机真的那么棒吗？</div>
                             {props.fullArticle?fullContent:titleContent}
+                        </div>
+                    </ListItem>
+                    <Divider style={{background:'#f0f2f7'}}/>
+                    <ListItem style={{paddingLeft:'22px'}}>
+                        <div style={{marginTop:'6px'}}>
+                            <div className={classes.title}>微软和索尼重新对中国国行游戏主机玩家开放“后门”的可能性有多少？</div>
+                            {props.dummyArticle?<DummyFullArticle/>:dummyTitleContent}
+                        </div>
+                    </ListItem>
+                    <Divider style={{background:'#f0f2f7'}}/>
+                    <ListItem style={{paddingLeft:'22px'}}>
+                        <div style={{marginTop:'6px'}}>
+                            <div className={classes.title}>微软和索尼重新对中国国行游戏主机玩家开放“后门”的可能性有多少？</div>
+                            {props.dummyArticle?<DummyFullArticle/>:dummyTitleContent}
+                        </div>
+                    </ListItem>
+                    <Divider style={{background:'#f0f2f7'}}/>
+                    <ListItem style={{paddingLeft:'22px'}}>
+                        <div style={{marginTop:'6px'}}>
+                            <div className={classes.title}>微软和索尼重新对中国国行游戏主机玩家开放“后门”的可能性有多少？</div>
+                            {props.dummyArticle?<DummyFullArticle/>:dummyTitleContent}
                         </div>
                     </ListItem>
                     <Divider style={{background:'#f0f2f7'}}/>
@@ -374,6 +415,9 @@ const mapDispatchToProps=(dispatch)=>{
         disagreePressed:()=>{dispatch(action.disagree())},
         dummyAgreePressed:()=>{dispatch(action.dummyAgree())},
         dummyDisagreePressed:()=>{dispatch(action.dummyDisagree())},
+        recommendOnClick:()=>{dispatch(action.recommendOnClick())},
+        subscribedOnClick:()=>{dispatch(action.subscribedOnClick())},
+        trendingOnClick:()=>{dispatch(action.trendingOnClick())}
     }
 }
 

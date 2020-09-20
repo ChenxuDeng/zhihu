@@ -7,7 +7,9 @@ export {
     openMessageIcon,
     closeMessageIcon,
     openLikeIcon,
-    closeLikeIcon
+    closeLikeIcon,
+    scrollUp,
+    scrollDown
 } from './navigation'
 
 export {
@@ -18,5 +20,8 @@ export {
     agree,
     disagree,
     dummyAgree,
-    dummyDisagree
+    dummyDisagree,
+    recommendOnClick,
+    subscribedOnClick,
+    trendingOnClick
 } from './frontPage'

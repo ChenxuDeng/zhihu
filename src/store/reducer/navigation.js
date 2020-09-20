@@ -6,7 +6,9 @@ const initialState={
     like:false,
     notification:false,
     messageIcon:false,
-    likeIcon:false
+    likeIcon:false,
+    navigation:true,
+    scrolledNavigation:false
 }
 
 const navigation=(state=initialState,action)=>{
@@ -61,6 +63,18 @@ const navigation=(state=initialState,action)=>{
             return{
                 ...state,
                 likeIcon:false
+            }
+        case(actionType.SCROLL_UP):
+            return{
+                ...state,
+                navigation:true,
+                scrolledNavigation:false
+            }
+        case(actionType.SCROLL_DOWN):
+            return{
+                ...state,
+                navigation:false,
+                scrolledNavigation:true
             }
         default:
             return state

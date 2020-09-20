@@ -53,3 +53,15 @@ export const closeLikeIcon=()=>{
         type:actionType.CLOSE_LIKE_ICON
     }
 }
+
+export const scrollUp=()=>{
+    return{
+        type:actionType.SCROLL_UP
+    }
+}
+
+export const scrollDown=()=>{
+    return{
+        type:actionType.SCROLL_DOWN
+    }
+}
