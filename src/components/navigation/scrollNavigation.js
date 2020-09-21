@@ -129,7 +129,7 @@ function ScrollNavigation(props) {
                 <Slide in={!props.navigation} direction={'up'}>
                     <Container maxWidth={'md'} classes={{maxWidthMd:classes.container}}>
                         <Toolbar classes={{regular:classes.toolbar}} disableGutters>
-                            <Button className={classes.logoButton} disableRipple component={Link} to={'/'}>
+                            <Button className={classes.logoButton} disableRipple component={Link} to={'/'} onClick={props.recommendOnClick}>
                                 <img src={logo} alt='logo' className={classes.logo}/>
                             </Button>
                             <Tabs indicatorColor={'none'} value={props.index}>

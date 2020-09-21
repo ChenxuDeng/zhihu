@@ -65,3 +65,15 @@ export const trendingOnClick=()=>{
         type:actionType.TRENDING_ONCLICK
     }
 }
+
+export const sideBarShow=()=>{
+    return{
+        type:actionType.SIDE_BAR_SHOW
+    }
+}
+
+export const sideBarHide=()=>{
+    return{
+        type:actionType.SIDE_BAR_HIDE
+    }
+}

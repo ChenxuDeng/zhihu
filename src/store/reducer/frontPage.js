@@ -7,7 +7,8 @@ const initialState={
     disagree:false,
     dummyAgree:false,
     dummyDisagree:false,
-    index:0
+    index:0,
+    sideBar:false
 }
 
 const frontPage=(state=initialState,action)=>{
@@ -18,6 +19,7 @@ const frontPage=(state=initialState,action)=>{
                 fullArticle:true
             }
         case(actionType.CLOSE_FULL_ARTICLE):
+            window.scrollTo(0,0)
             return{
                 ...state,
                 fullArticle:false
@@ -59,7 +61,7 @@ const frontPage=(state=initialState,action)=>{
         case(actionType.RECOMMEND_ONCLICK):
             return{
                 ...state,
-                index:0
+                index:0,
             }
         case(actionType.SUBSCRIBED_ONCLICK):
             return{
@@ -71,7 +73,16 @@ const frontPage=(state=initialState,action)=>{
                 ...state,
                 index:2
             }
-
+        case(actionType.SIDE_BAR_SHOW):
+            return{
+                ...state,
+                sideBar:false
+            }
+        case(actionType.SIDE_BAR_HIDE):
+            return{
+                ...state,
+                sideBar:true
+            }
         default:
             return state
     }

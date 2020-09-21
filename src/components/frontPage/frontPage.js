@@ -6,6 +6,7 @@ import SideBarTop from "../sideBarTop/sideBarTop";
 import SideBarBottom from "../sideBarBottom/sideBarBottom";
 
 function FrontPage(props) {
+
     const useStyle=makeStyles((theme)=>{
         return{
             container:{

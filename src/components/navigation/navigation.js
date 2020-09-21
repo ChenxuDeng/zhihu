@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -37,6 +37,14 @@ import Slide from "@material-ui/core/Slide";
 import {Link} from 'react-router-dom'
 
 function Navigation(props) {
+    useEffect(()=>{
+        if(window.location.pathname==='/'){
+            setIndex(0)
+        }else if(window.location.pathname==='/discover'){
+            setIndex(1)
+        }
+    },[])
+
     const useStyle=makeStyles((theme)=>{
         return{
             appbar:{
@@ -336,14 +344,14 @@ function Navigation(props) {
                 <Slide in={props.navigation}>
                     <Container maxWidth={'md'} classes={{maxWidthMd:classes.container}}>
                         <Toolbar classes={{regular:classes.toolbar}} disableGutters>
-                            <Button className={classes.logoButton} disableRipple component={Link} to={'/'}>
+                            <Button className={classes.logoButton} disableRipple component={Link} to={'/'} onClick={props.recommendOnClick}>
                                 <img src={logo} alt='logo' className={classes.logo}/>
                             </Button>
                             <Tabs className={classes.tabs} value={index} classes={{indicator:classes.indicator}}>
                                 <Tab label={'首页'}
                                      className={classes.tab}
                                      classes={{wrapper:classes.tabWrapper,selected:classes.selected}}
-                                     onClick={()=>{setIndex(0)}}
+                                     onClick={()=>{setIndex(0);props.recommendOnClick()}}
                                      disableRipple
                                      component={Link}
                                      to={'/'}
@@ -354,6 +362,8 @@ function Navigation(props) {
                                      style={{marginLeft:'20px'}}
                                      onClick={()=>{setIndex(1)}}
                                      disableRipple
+                                     component={Link}
+                                     to={'/discover'}
                                 />
                                 <Tab label={'等你回答'}
                                      className={classes.tab}
@@ -527,7 +537,8 @@ const mapDispatchToProps=(dispatch)=>{
         openMessageIcon:()=>{dispatch(action.openMessageIcon())},
         closeMessageIcon:()=>{dispatch(action.closeMessageIcon())},
         openLikeIcon:()=>{dispatch(action.openLikeIcon())},
-        closeLikeIcon:()=>{dispatch(action.closeLikeIcon())}
+        closeLikeIcon:()=>{dispatch(action.closeLikeIcon())},
+        recommendOnClick:()=>{dispatch(action.recommendOnClick())}
     }
 }
 

@@ -9,7 +9,7 @@ export {
     openLikeIcon,
     closeLikeIcon,
     scrollUp,
-    scrollDown
+    scrollDown,
 } from './navigation'
 
 export {
@@ -23,5 +23,7 @@ export {
     dummyDisagree,
     recommendOnClick,
     subscribedOnClick,
-    trendingOnClick
+    trendingOnClick,
+    sideBarShow,
+    sideBarHide
 } from './frontPage'

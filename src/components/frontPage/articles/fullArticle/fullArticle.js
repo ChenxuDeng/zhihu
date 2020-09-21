@@ -463,7 +463,7 @@ function FullArticle(props) {
 
 const mapStateToProps=(state)=>{
     return{
-        fullArticle:state.frontPage.fullArticle,
+        fullArticle:state.frontPage.fullArticle
     }
 }
 

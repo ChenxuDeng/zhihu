@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -15,6 +15,10 @@ import SideBarTop from "../sideBarTop/sideBarTop";
 import SideBarBottom from "../sideBarBottom/sideBarBottom";
 
 function SubscribedPage(props) {
+    useEffect(()=>{
+        window.scrollTo(0,0)
+    },[])
+
     const useStyle=makeStyles((theme)=>{
         return{
             container:{
@@ -150,6 +154,7 @@ function SubscribedPage(props) {
             wrapper:{
                 background:'#f6f6f6',
                 paddingTop:'10px',
+                marginTop:'-12px'
             }
         }
     })
