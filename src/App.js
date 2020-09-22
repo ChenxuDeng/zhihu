@@ -10,6 +10,7 @@ import ScrollNavigation from "./components/navigation/scrollNavigation";
 import {connect} from 'react-redux'
 import * as action from './store/action/index'
 import DiscoverPage from "./components/discoverPage/discoverPage";
+import AnswerPage from "./components/answerPage/answerPage";
 
 class App extends Component {
 
@@ -39,6 +40,7 @@ class App extends Component {
                     <ThemeProvider theme={theme}>
                         {this.props.scrolledNavigation?<ScrollNavigation/>:<Navigation/>}
                         <Switch>
+                            <Route path={'/answer'} component={AnswerPage}/>
                             <Route path={'/discover'} component={DiscoverPage}/>
                             <Route path={'/trending'} component={TrendingPage}/>
                             <Route path={'/subscribed'} component={SubscribedPage}/>

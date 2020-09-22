@@ -8,11 +8,13 @@ import thunk from "redux-thunk";
 import {Provider} from "react-redux";
 import navigation from "./store/reducer/navigation";
 import frontPage from "./store/reducer/frontPage";
+import questionData from "./store/reducer/questionData";
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 const rootReducer=combineReducers({
     navigation:navigation,
-    frontPage:frontPage
+    frontPage:frontPage,
+    questionData:questionData
 })
 
 const store=createStore(rootReducer,composeEnhancers(

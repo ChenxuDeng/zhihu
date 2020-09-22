@@ -65,12 +65,36 @@ const navigation=(state=initialState,action)=>{
                 likeIcon:false
             }
         case(actionType.SCROLL_UP):
+            if(window.location.pathname==='/answer'){
+                return{
+                    ...state,
+                    navigation:true
+                }
+            }
+            if(window.location.pathname==='/discover'){
+                return{
+                    ...state,
+                    navigation:true
+                }
+            }
             return{
                 ...state,
                 navigation:true,
                 scrolledNavigation:false
             }
         case(actionType.SCROLL_DOWN):
+            if(window.location.pathname==='/answer'){
+                return{
+                    ...state,
+                    navigation:true
+                }
+            }
+            if(window.location.pathname==='/discover'){
+                return{
+                    ...state,
+                    navigation:true
+                }
+            }
             return{
                 ...state,
                 navigation:false,

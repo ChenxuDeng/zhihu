@@ -42,6 +42,8 @@ function Navigation(props) {
             setIndex(0)
         }else if(window.location.pathname==='/discover'){
             setIndex(1)
+        }else if(window.location.pathname==='/answer'){
+            setIndex(2)
         }
     },[])
 
@@ -344,7 +346,7 @@ function Navigation(props) {
                 <Slide in={props.navigation}>
                     <Container maxWidth={'md'} classes={{maxWidthMd:classes.container}}>
                         <Toolbar classes={{regular:classes.toolbar}} disableGutters>
-                            <Button className={classes.logoButton} disableRipple component={Link} to={'/'} onClick={props.recommendOnClick}>
+                            <Button className={classes.logoButton} disableRipple component={Link} to={'/'} onClick={()=>{props.recommendOnClick();setIndex(0)}}>
                                 <img src={logo} alt='logo' className={classes.logo}/>
                             </Button>
                             <Tabs className={classes.tabs} value={index} classes={{indicator:classes.indicator}}>
@@ -371,6 +373,8 @@ function Navigation(props) {
                                      style={{marginLeft:'20px'}}
                                      onClick={()=>{setIndex(2)}}
                                      disableRipple
+                                     component={Link}
+                                     to={'/answer'}
                                 />
                             </Tabs>
                             <ClickAwayListener onClickAway={()=>{setFocus(false)}}>

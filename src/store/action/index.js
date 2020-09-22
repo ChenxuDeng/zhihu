@@ -27,3 +27,7 @@ export {
     sideBarShow,
     sideBarHide
 } from './frontPage'
+
+export {
+    fetchQuestion
+} from './questionData'
