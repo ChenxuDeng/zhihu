@@ -37,3 +37,10 @@ export const fetchQuestion=()=>{
         })
     }
 }
+
+export const deleteQuestion=(index)=>{
+    return{
+        type:actionType.DELETE_QUESTION,
+        index:index
+    }
+}

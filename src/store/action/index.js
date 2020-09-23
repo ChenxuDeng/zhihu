@@ -29,5 +29,6 @@ export {
 } from './frontPage'
 
 export {
-    fetchQuestion
+    fetchQuestion,
+    deleteQuestion
 } from './questionData'

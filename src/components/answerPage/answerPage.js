@@ -33,7 +33,8 @@ function AnswerPage(props) {
             wrapper:{
                 background:'#f6f6f6',
                 paddingTop:'10px',
-                marginTop:'-12px'
+                marginTop:'-12px',
+                minWidth:'1100px'
             },
             paper:{
                 width:'694px',
@@ -86,20 +87,28 @@ function AnswerPage(props) {
     const classes=useStyle()
 
     const [closeIcon,setCloseIcon]=useState(false)
+    const [i,setI]=useState(null)
+
+    const mouseInHandler=(index)=>{
+        setCloseIcon(true)
+        setI(index)
+    }
 
     const loader=<React.Fragment>
-        <Facebook style={{margin:'20px 20px -20px 20px'}}/>
-        <Facebook style={{margin:'20px 20px -20px 20px'}}/>
-        <Facebook style={{margin:'20px 20px -20px 20px'}}/>
-        <Facebook style={{margin:'20px 20px -20px 20px'}}/>
-        <Facebook style={{margin:'20px 20px -20px 20px'}}/>
-        <Facebook style={{margin:'20px 20px -20px 20px'}}/>
+        <Facebook style={{margin:'20px 20px -30px 20px'}}/>
+        <Facebook style={{margin:'20px 20px -30px 20px'}}/>
+        <Facebook style={{margin:'20px 20px -30px 20px'}}/>
+        <Facebook style={{margin:'20px 20px -30px 20px'}}/>
+        <Facebook style={{margin:'20px 20px -30px 20px'}}/>
+        <Facebook style={{margin:'20px 20px -30px 20px'}}/>
+        <Facebook style={{margin:'20px 20px -30px 20px'}}/>
+        <Facebook style={{margin:'20px 20px -30px 20px'}}/>
     </React.Fragment>
 
     let questions=(props.questions || []).map((questions,index)=>{
             return <React.Fragment>
-                <ListItem style={{position:'relative'}}>
-                    <CloseIcon className={classes.closeIcon}/>
+                <ListItem style={{position:'relative'}} onMouseOver={()=>mouseInHandler(index)} onMouseLeave={()=>{setCloseIcon(false)}}>
+                    {closeIcon && i===index?<CloseIcon className={classes.closeIcon} onClick={() => props.deleteQuestion(index)}/>:null}
                     <div style={{width:'634px'}}>
                         <div style={{display:'flex'}}>
                             <Avatar style={{width:'20px',height:'20px',marginRight:'8px'}}>
@@ -160,32 +169,6 @@ function AnswerPage(props) {
                         </div>
                         <Paper className={classes.paper} style={{marginTop:'64px'}}>
                             <List>
-                                <ListItem style={{position:'relative'}}>
-                                    <CloseIcon className={classes.closeIcon}/>
-                                    <div style={{width:'634px'}}>
-                                        <div style={{display:'flex'}}>
-                                            <Avatar style={{width:'20px',height:'20px',marginRight:'8px'}}>
-                                                <img src={questionAvatar} alt='questionAvatar' style={{width:'20px',height:'20px'}}/>
-                                            </Avatar>
-                                            <span style={{fontSize:'15px',color:'rgb(133, 144, 166)'}}>你可能感兴趣</span>
-                                        </div>
-                                        <div style={{marginTop:'12px'}}>
-                                            <a href={'#'} className={classes.a}>
-                                                高中初中一些不是很重要的班委（比如说纪律委员，劳动委员）安排给调皮的差生合适吗？
-                                            </a>
-                                        </div>
-                                        <div style={{display:'flex',alignItems:'center',marginTop:'18px',marginBottom:'7px'}}>
-                                            <Button className={classes.questionButton}>
-                                                <CreateIcon style={{width:'18px',marginRight:'3px'}}/>
-                                                写回答
-                                            </Button>
-                                            <div style={{marginLeft:'16px'}}>
-                                                <span style={{fontSize:'14px',color:'#8590a6'}}>107 回答 · 121 关注</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </ListItem>
-                                <Divider style={{background:'#f0f2f7',width:'95.5%',margin:'0 auto'}}/>
                                 {props.loading?loader:questions}
                             </List>
                         </Paper>
@@ -209,7 +192,8 @@ const mapStateToProps=(state)=>{
 
 const mapDispatchToProps=(dispatch)=>{
     return{
-        fetchQuestion:()=>{dispatch(action.fetchQuestion())}
+        fetchQuestion:()=>{dispatch(action.fetchQuestion())},
+        deleteQuestion:(index)=>{dispatch(action.deleteQuestion(index))}
     }
 }
 

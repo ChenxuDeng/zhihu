@@ -24,7 +24,8 @@ function DiscoverPage(props) {
             wrapper:{
                 background:'#f6f6f6',
                 paddingTop:'10px',
-                marginTop:'-12px'
+                marginTop:'-12px',
+                minWidth:'1100px'
             },
             paper:{
                 width:'490px',

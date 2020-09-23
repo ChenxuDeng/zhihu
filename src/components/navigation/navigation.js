@@ -52,7 +52,9 @@ function Navigation(props) {
             appbar:{
                 height:'52px',
                 boxShadow:'0 1px 3px rgba(18,18,18,.1)',
-                minWidth:'1100px'
+                minWidth:'1100px',
+                top:'0',
+                left:'0'
             },
             toolbar:{
                 minHeight:'52px'

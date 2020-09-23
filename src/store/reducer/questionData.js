@@ -7,6 +7,7 @@ const initialState={
 }
 
 const questionData=(state=initialState,action)=>{
+    const index=action.index
     switch(action.type){
         case(actionType.FETCH_QUESTION_START):
             return{
@@ -25,6 +26,11 @@ const questionData=(state=initialState,action)=>{
                 loading:false,
                 error:true
             }
+        case(actionType.DELETE_QUESTION):
+                return{
+                    ...state,
+                    questions:state.questions.filter((item,i)=>index!==i)
+                }
         default:
             return state
     }
